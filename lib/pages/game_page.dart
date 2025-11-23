@@ -70,9 +70,9 @@ class _GamePageState extends State<GamePage> with TickerProviderStateMixin {
       crossAxisAlignment: .end,
       mainAxisAlignment: .center,
       children: [
-        _buildDraggableGlasses(_glasses[0]),
-        _buildDraggableGlasses(_glasses[1]),
-        _buildDraggableGlasses(_glasses[2]),
+        Flexible(child: _buildDraggableGlasses(_glasses[0])),
+        Flexible(child: _buildDraggableGlasses(_glasses[1])),
+        Flexible(child: _buildDraggableGlasses(_glasses[2])),
       ],
     );
   }
@@ -171,63 +171,54 @@ class _GamePageState extends State<GamePage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIMode(.immersiveSticky, overlays: [.top]);
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.transparent,
-        bottomOpacity: 0,
-      ),
       body: Stack(
         children: [
           GameBackground(),
           TableBackground(),
-          SafeArea(
-            child: Column(
-              children: [
-                Row(
-                  crossAxisAlignment: .center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: StrokedLabel(label: "Moves: $_moveCount"),
-                    ),
-                    Spacer(),
-                    IconButton(
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          useSafeArea: true,
-                          builder: (context) {
-                            return HelpMenu();
-                          },
-                        );
-                      },
-                      icon: Icon(Icons.help_outline, color: Colors.white,),
-                      iconSize: 40,
-                    ),
-                    RoundButton(
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return PauseMenu();
-                          },
-                          useSafeArea: true,
-                          barrierDismissible: false,
-                        );
-                      },
-                      icon: Icons.pause,
-                      size: 25,
-                    ),
-                  ],
-                ),
-                Spacer(),
-                _buildGlassesRow(),
-                Spacer(),
-              ],
-            ),
+          Column(
+            children: [
+              Row(
+                crossAxisAlignment: .center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: StrokedLabel(label: "Moves: $_moveCount"),
+                  ),
+                  Spacer(),
+                  IconButton(
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        useSafeArea: true,
+                        builder: (context) {
+                          return HelpMenu();
+                        },
+                      );
+                    },
+                    icon: Icon(Icons.help_outline, color: Colors.white,),
+                    iconSize: 40,
+                  ),
+                  RoundButton(
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return PauseMenu();
+                        },
+                        useSafeArea: true,
+                        barrierDismissible: false,
+                      );
+                    },
+                    icon: Icons.pause,
+                  ),
+                ],
+              ),
+              Spacer(),
+              _buildGlassesRow(),
+              Spacer(),
+            ],
           ),
         ],
       ),
