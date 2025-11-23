@@ -16,24 +16,34 @@ class ResultMenu extends StatelessWidget {
       alignment: .center,
       shape: RoundedRectangleBorder(borderRadius: .all(.circular(20))),
       content: Column(
+        mainAxisSize: .min,
         children: [
-          StrokedLabel(label: WIN_MESSAGE),
-          Spacer(),
-          StrokedLabel(label: "Total Moves"),
-          StrokedLabel(label: "$moves"),
-          Spacer(),
-          Row(
-            mainAxisAlignment: .center,
-            children: [
-              RoundButton(
-                onPressed: () => Navigator.pop(context, false),
-                icon: Icons.arrow_back,
-              ),
-              RoundButton(
-                onPressed: () => Navigator.pop(context, true),
-                icon: Icons.replay,
-              ),
-            ],
+          Flexible(
+            child: Column(
+              children: [
+                StrokedLabel(label: WIN_MESSAGE),
+                Spacer(),
+                StrokedLabel(label: "Total Moves"),
+                StrokedLabel(label: "$moves"),
+                Spacer(),
+              ],
+            ),
+          ),
+          Flexible(
+            child: Row(
+              mainAxisAlignment: .spaceEvenly,
+              mainAxisSize: .max,
+              children: [
+                RoundButton(
+                  onPressed: () => Navigator.pop(context, false),
+                  icon: Icons.arrow_back,
+                ),
+                RoundButton(
+                  onPressed: () => Navigator.pop(context, true),
+                  icon: Icons.replay,
+                ),
+              ],
+            ),
           ),
         ],
       ),

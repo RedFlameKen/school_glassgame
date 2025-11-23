@@ -21,7 +21,6 @@ class HelpMenu extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: .all(.circular(20))),
       content: Column(
         mainAxisSize: .min,
-        verticalDirection: .down,
         children: [
           Flexible(
             child: SingleChildScrollView(
@@ -51,18 +50,20 @@ class HelpMenu extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
-            padding: .only(top: 15),
-            child: Row(
-              mainAxisAlignment: .center,
-              children: [
-                RoundButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: Icons.close,
-                ),
-              ],
+          Flexible(
+            child: Padding(
+              padding: .only(top: 15),
+              child: Row(
+                mainAxisAlignment: .center,
+                children: [
+                  RoundButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: Icons.close,
+                  ),
+                ],
+              ),
             ),
           ),
         ],

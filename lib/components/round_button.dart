@@ -14,13 +14,14 @@ class RoundButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RawMaterialButton(
+    return IconButton.filled(
       onPressed: onPressed,
-      padding: .all(15),
-      elevation: 2,
-      shape: CircleBorder(),
-      fillColor: GlassGameColors.BUTTON_BG,
-      child: Icon(icon, color: GlassGameColors.BUTTON_FG, size: size),
+      icon: Icon(icon, color: GlassGameColors.BUTTON_FG, size: size),
+      style: ButtonStyle(
+        elevation: .all(2),
+        shadowColor: .all(Colors.black),
+        backgroundColor: .all(GlassGameColors.BUTTON_BG),
+      ),
     );
   }
 }
