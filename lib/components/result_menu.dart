@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mp5/colors/colors.dart';
 import 'package:mp5/components/large_label.dart';
 import 'package:mp5/components/round_button.dart';
 
@@ -11,6 +12,7 @@ class ResultMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      backgroundColor: GlassGameColors.DIALOG_BG,
       alignment: .center,
       insetPadding: .only(top: 150, bottom: 150),
       shape: RoundedRectangleBorder(borderRadius: .all(.circular(20))),

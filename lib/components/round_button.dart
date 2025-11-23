@@ -19,8 +19,8 @@ class RoundButton extends StatelessWidget {
       padding: .all(15),
       elevation: 2,
       shape: CircleBorder(),
-      fillColor: GlassGameColors.BUTTON_BACKGROUND,
-      child: Icon(icon, color: GlassGameColors.BUTTON_FOREGROUND, size: size),
+      fillColor: GlassGameColors.BUTTON_BG,
+      child: Icon(icon, color: GlassGameColors.BUTTON_FG, size: size),
     );
   }
 }

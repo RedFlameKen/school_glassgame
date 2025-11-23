@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mp5/colors/colors.dart';
 import 'package:mp5/components/large_label.dart';
 import 'package:mp5/components/round_button.dart';
 import 'package:mp5/pages/game_page.dart';
@@ -10,6 +11,7 @@ class PauseMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       alignment: .center,
+      backgroundColor: GlassGameColors.DIALOG_BG,
       insetPadding: .only(top: 150, bottom: 150),
       shape: RoundedRectangleBorder(borderRadius: .all(.circular(20))),
       content: Container(
