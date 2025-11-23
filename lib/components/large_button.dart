@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mp5/colors/colors.dart';
+import 'package:glassgame/colors/colors.dart';
 
 class LargeButton extends StatelessWidget {
   final Function() onPressed;

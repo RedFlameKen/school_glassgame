@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mp5/pages/home_page.dart';
+import 'package:glassgame/pages/home_page.dart';
 
 void main() {
   runApp(const MyApp());

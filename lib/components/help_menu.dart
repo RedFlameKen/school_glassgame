@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mp5/colors/colors.dart';
-import 'package:mp5/components/large_label.dart';
-import 'package:mp5/components/round_button.dart';
+import 'package:glassgame/colors/colors.dart';
+import 'package:glassgame/components/large_label.dart';
+import 'package:glassgame/components/round_button.dart';
 
 class HelpMenu extends StatelessWidget {
   static const String MECHANICS_HELP_MESSAGE =

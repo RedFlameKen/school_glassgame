@@ -1,4 +1,4 @@
-package com.example.mp5
+package com.redflameken.glassgame
 
 import io.flutter.embedding.android.FlutterActivity
 

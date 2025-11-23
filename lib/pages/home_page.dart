@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mp5/components/background/game_background.dart';
-import 'package:mp5/components/large_button.dart';
-import 'package:mp5/pages/game_page.dart';
+import 'package:glassgame/components/background/game_background.dart';
+import 'package:glassgame/components/large_button.dart';
+import 'package:glassgame/pages/game_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

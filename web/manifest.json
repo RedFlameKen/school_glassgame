@@ -1,6 +1,6 @@
 {
-    "name": "mp5",
-    "short_name": "mp5",
+    "name": "glassgame",
+    "short_name": "glassgame",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

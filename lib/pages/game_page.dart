@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mp5/components/background/game_background.dart';
-import 'package:mp5/components/glass/contents_label.dart';
-import 'package:mp5/components/glass/glass.dart';
-import 'package:mp5/components/background/table_background.dart';
-import 'package:mp5/components/help_menu.dart';
-import 'package:mp5/components/large_label.dart';
-import 'package:mp5/components/pause_menu.dart';
-import 'package:mp5/components/result_menu.dart';
-import 'package:mp5/components/round_button.dart';
+import 'package:glassgame/components/background/game_background.dart';
+import 'package:glassgame/components/glass/contents_label.dart';
+import 'package:glassgame/components/glass/glass.dart';
+import 'package:glassgame/components/background/table_background.dart';
+import 'package:glassgame/components/help_menu.dart';
+import 'package:glassgame/components/large_label.dart';
+import 'package:glassgame/components/pause_menu.dart';
+import 'package:glassgame/components/result_menu.dart';
+import 'package:glassgame/components/round_button.dart';
 
 class GamePage extends StatefulWidget {
   const GamePage({super.key});
