@@ -68,7 +68,7 @@ class _GamePageState extends State<GamePage> with TickerProviderStateMixin {
   Widget _buildGlassesRow() {
     return Row(
       crossAxisAlignment: .end,
-      mainAxisAlignment: .center,
+      mainAxisAlignment: .spaceAround,
       children: [
         Flexible(child: _buildDraggableGlasses(_glasses[0])),
         Flexible(child: _buildDraggableGlasses(_glasses[1])),
@@ -143,29 +143,26 @@ class _GamePageState extends State<GamePage> with TickerProviderStateMixin {
   }
 
   Widget _buildDraggableGlasses(Glass glass) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        children: [
-          Draggable<Glass>(
-            data: glass,
-            feedback: GlassWidget(glass: glass),
-            child: _buildDragTargetGlass(glass),
-            onDragStarted: () {
-              setState(() {
-                glass.isDragged = true;
-                _heldGlass = null;
-              });
-            },
-            onDragEnd: (details) {
-              setState(() {
-                glass.isDragged = false;
-              });
-            },
-          ),
-          ContentsLabel(label: "${glass.contents}"),
-        ],
-      ),
+    return Column(
+      children: [
+        Draggable<Glass>(
+          data: glass,
+          feedback: GlassWidget(glass: glass),
+          child: _buildDragTargetGlass(glass),
+          onDragStarted: () {
+            setState(() {
+              glass.isDragged = true;
+              _heldGlass = null;
+            });
+          },
+          onDragEnd: (details) {
+            setState(() {
+              glass.isDragged = false;
+            });
+          },
+        ),
+        ContentsLabel(label: "${glass.contents}"),
+      ],
     );
   }
 
