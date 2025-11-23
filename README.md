@@ -1,16 +1,9 @@
-# mp5
+# Glass Game
 
-A new Flutter project.
+This is my submission to Machine Problem 5 for MOBILECOMP2.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Credits
+resources used:
+table image: [](https://static.vecteezy.com/system/resources/previews/026/172/334/original/cartoon-style-illustration-of-kitchen-room-dining-room-with-dining-wooden-table-fridge-oven-with-a-stove-and-hob-sink-kabinets-and-extractor-hood-vector.jpg)
+background image: [](https://www.freepik.com/free-vector/cartoon-illustration-cozy-modern-kitchen-with-dinner-table-household-appliances_2890963.htm)
