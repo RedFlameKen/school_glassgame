@@ -14,31 +14,28 @@ class ResultMenu extends StatelessWidget {
     return AlertDialog(
       backgroundColor: GlassGameColors.DIALOG_BG,
       alignment: .center,
-      insetPadding: .only(top: 150, bottom: 150),
       shape: RoundedRectangleBorder(borderRadius: .all(.circular(20))),
-      content: Container(
-        child: Column(
-          children: [
-            StrokedLabel(label: WIN_MESSAGE),
-            Spacer(),
-            StrokedLabel(label: "Total Moves"),
-            StrokedLabel(label: "$moves"),
-            Spacer(),
-            Row(
-              mainAxisAlignment: .center,
-              children: [
-                RoundButton(
-                  onPressed: () => Navigator.pop(context, false),
-                  icon: Icons.arrow_back,
-                ),
-                RoundButton(
-                  onPressed: () => Navigator.pop(context, true),
-                  icon: Icons.replay,
-                ),
-              ],
-            ),
-          ],
-        ),
+      content: Column(
+        children: [
+          StrokedLabel(label: WIN_MESSAGE),
+          Spacer(),
+          StrokedLabel(label: "Total Moves"),
+          StrokedLabel(label: "$moves"),
+          Spacer(),
+          Row(
+            mainAxisAlignment: .center,
+            children: [
+              RoundButton(
+                onPressed: () => Navigator.pop(context, false),
+                icon: Icons.arrow_back,
+              ),
+              RoundButton(
+                onPressed: () => Navigator.pop(context, true),
+                icon: Icons.replay,
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

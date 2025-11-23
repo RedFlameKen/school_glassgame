@@ -12,49 +12,46 @@ class PauseMenu extends StatelessWidget {
     return AlertDialog(
       alignment: .center,
       backgroundColor: GlassGameColors.DIALOG_BG,
-      insetPadding: .only(top: 150, bottom: 150),
       shape: RoundedRectangleBorder(borderRadius: .all(.circular(20))),
-      content: Container(
-        child: Column(
-          children: [
-            Spacer(),
-            StrokedLabel(label: "Paused"),
-            Spacer(),
-            Row(
-              mainAxisAlignment: .center,
-              children: [
-                RoundButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    Navigator.pop(context);
-                  },
-                  icon: Icons.arrow_back,
-                ),
-                RoundButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    Navigator.pop(context);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return GamePage();
-                        },
-                      ),
-                    );
-                  },
-                  icon: Icons.replay,
-                ),
-                RoundButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: Icons.play_arrow,
-                ),
-              ],
-            ),
-          ],
-        ),
+      content: Column(
+        children: [
+          Spacer(),
+          StrokedLabel(label: "Paused"),
+          Spacer(),
+          Row(
+            mainAxisAlignment: .center,
+            children: [
+              RoundButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  Navigator.pop(context);
+                },
+                icon: Icons.arrow_back,
+              ),
+              RoundButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return GamePage();
+                      },
+                    ),
+                  );
+                },
+                icon: Icons.replay,
+              ),
+              RoundButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: Icons.play_arrow,
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

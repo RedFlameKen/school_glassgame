@@ -4,6 +4,7 @@ import 'package:mp5/components/background/game_background.dart';
 import 'package:mp5/components/glass/contents_label.dart';
 import 'package:mp5/components/glass/glass.dart';
 import 'package:mp5/components/background/table_background.dart';
+import 'package:mp5/components/help_menu.dart';
 import 'package:mp5/components/large_label.dart';
 import 'package:mp5/components/pause_menu.dart';
 import 'package:mp5/components/result_menu.dart';
@@ -186,12 +187,26 @@ class _GamePageState extends State<GamePage> with TickerProviderStateMixin {
             child: Column(
               children: [
                 Row(
+                  crossAxisAlignment: .center,
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: StrokedLabel(label: "Moves: $_moveCount"),
                     ),
                     Spacer(),
+                    IconButton(
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          useSafeArea: true,
+                          builder: (context) {
+                            return HelpMenu();
+                          },
+                        );
+                      },
+                      icon: Icon(Icons.help_outline, color: Colors.white,),
+                      iconSize: 40,
+                    ),
                     RoundButton(
                       onPressed: () {
                         showDialog(
