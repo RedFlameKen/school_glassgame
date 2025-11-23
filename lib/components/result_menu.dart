@@ -27,11 +27,11 @@ class ResultMenu extends StatelessWidget {
               children: [
                 RoundButton(
                   onPressed: () => Navigator.pop(context, false),
-                  icon: Icon(Icons.arrow_back, size: 35),
+                  icon: Icons.arrow_back,
                 ),
                 RoundButton(
                   onPressed: () => Navigator.pop(context, true),
-                  icon: Icon(Icons.replay, size: 35),
+                  icon: Icons.replay,
                 ),
               ],
             ),

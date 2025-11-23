@@ -26,7 +26,7 @@ class PauseMenu extends StatelessWidget {
                     Navigator.pop(context);
                     Navigator.pop(context);
                   },
-                  icon: Icon(Icons.arrow_back, size: 35),
+                  icon: Icons.arrow_back,
                 ),
                 RoundButton(
                   onPressed: () {
@@ -41,13 +41,13 @@ class PauseMenu extends StatelessWidget {
                       ),
                     );
                   },
-                  icon: Icon(Icons.replay, size: 35),
+                  icon: Icons.replay,
                 ),
                 RoundButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  icon: Icon(Icons.play_arrow, size: 35),
+                  icon: Icons.play_arrow,
                 ),
               ],
             ),

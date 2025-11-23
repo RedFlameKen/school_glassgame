@@ -203,7 +203,8 @@ class _GamePageState extends State<GamePage> with TickerProviderStateMixin {
                           barrierDismissible: false,
                         );
                       },
-                      icon: Icon(Icons.pause),
+                      icon: Icons.pause,
+                      size: 25,
                     ),
                   ],
                 ),

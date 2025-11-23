@@ -3,8 +3,14 @@ import 'package:mp5/colors/colors.dart';
 
 class RoundButton extends StatelessWidget {
   final Function() onPressed;
-  final Widget icon;
-  const RoundButton({super.key, required this.onPressed, required this.icon});
+  final IconData icon;
+  final double size;
+  const RoundButton({
+    super.key,
+    required this.onPressed,
+    required this.icon,
+    this.size = 35,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +20,7 @@ class RoundButton extends StatelessWidget {
       elevation: 2,
       shape: CircleBorder(),
       fillColor: GlassGameColors.BUTTON_BACKGROUND,
-      child: icon,
+      child: Icon(icon, color: GlassGameColors.BUTTON_FOREGROUND, size: size),
     );
   }
 }

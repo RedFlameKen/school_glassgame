@@ -9,6 +9,7 @@ class LargeButton extends StatelessWidget {
   final Color foregroundColor;
   final Size size;
   final double borderSize;
+  final double fontSize;
   final Color borderColor;
 
   const LargeButton({
@@ -19,6 +20,7 @@ class LargeButton extends StatelessWidget {
     this.foregroundColor = GlassGameColors.BUTTON_FOREGROUND,
     this.size = const Size(200, 80),
     this.borderSize = 5,
+    this.fontSize = 25,
     this.borderColor = GlassGameColors.GLASS,
   });
 
@@ -33,7 +35,11 @@ class LargeButton extends StatelessWidget {
         side: BorderSide(width: borderSize, color: borderColor)
       ),
       onPressed: onPressed,
-      child: Text(label),
+      child: Text(label,
+        style: TextStyle(
+          fontSize: fontSize,
+        ),
+      ),
     );
   }
 }
