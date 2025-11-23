@@ -8,61 +8,122 @@ import 'package:mp5/pages/game_page.dart';
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Expanded(
-        child: Stack(
-          children: [
-            GameBackground(),
-            Column(
-              children: [
-                Spacer(),
-                Padding(
-                  padding: .only(left: 50, right: 50),
-                  child: Image.asset(
-                    "assets/images/glass_game_title.png",
-                    fit: .fill,
+  Widget _buildHomePage(BuildContext context, bool isPortrait) {
+    return Expanded(
+      child: Stack(
+        children: [
+          GameBackground(),
+          isPortrait ? _buildPortrait(context) : _buildLandscape(context),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildLandscape(BuildContext context) {
+    return Row(
+      children: [
+        Flexible(
+          child: Column(
+            children: [
+              Spacer(),
+              Padding(
+                padding: .only(left: 50, right: 50),
+                child: Image.asset(
+                  "assets/images/glass_game_title.png",
+                  fit: .fitWidth,
+                ),
+              ),
+              Spacer(),
+            ],
+          ),
+        ),
+        Flexible(
+          child: Column(
+            mainAxisAlignment: .spaceAround,
+            children: [
+              Spacer(),
+              Center(
+                child: Padding(
+                  padding: .all(15),
+                  child: LargeButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const GamePage();
+                          },
+                        ),
+                      );
+                    },
+                    label: "Play",
                   ),
                 ),
-                Spacer(),
-                Column(
-                  mainAxisAlignment: .spaceAround,
-                  children: [
-                    Center(
-                      child: Padding(
-                        padding: .all(15),
-                        child: LargeButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return const GamePage();
-                                },
-                              ),
-                            );
-                          },
-                          label: "Play",
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Padding(
-                        padding: .all(15),
-                        child: LargeButton(
-                          onPressed: () => exit(0),
-                          label: "Exit",
-                        ),
-                      ),
-                    ),
-                  ],
+              ),
+              Center(
+                child: Padding(
+                  padding: .all(15),
+                  child: LargeButton(onPressed: () => exit(0), label: "Exit"),
                 ),
-                Spacer(),
-              ],
+              ),
+              Spacer(),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPortrait(BuildContext context) {
+    return Column(
+      children: [
+        Spacer(),
+        Padding(
+          padding: .only(left: 50, right: 50),
+          child: Image.asset("assets/images/glass_game_title.png", fit: .fill),
+        ),
+        Spacer(),
+        Column(
+          mainAxisAlignment: .spaceAround,
+          children: [
+            Center(
+              child: Padding(
+                padding: .all(15),
+                child: LargeButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return const GamePage();
+                        },
+                      ),
+                    );
+                  },
+                  label: "Play",
+                ),
+              ),
+            ),
+            Center(
+              child: Padding(
+                padding: .all(15),
+                child: LargeButton(onPressed: () => exit(0), label: "Exit"),
+              ),
             ),
           ],
         ),
+        Spacer(),
+      ],
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: OrientationBuilder(
+        builder: (context, orientation) {
+          return _buildHomePage(context, orientation == Orientation.portrait);
+        },
       ),
     );
   }
