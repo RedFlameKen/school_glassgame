@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:mp5/components/background/game_background.dart';
+import 'package:mp5/components/glass/contents_label.dart';
 import 'package:mp5/components/glass/glass.dart';
 import 'package:mp5/components/background/table_background.dart';
+import 'package:mp5/components/large_label.dart';
+import 'package:mp5/components/pause_menu.dart';
+import 'package:mp5/components/result_menu.dart';
+import 'package:mp5/components/round_button.dart';
 
 class GamePage extends StatefulWidget {
   const GamePage({super.key});
@@ -11,11 +17,52 @@ class GamePage extends StatefulWidget {
 }
 
 class _GamePageState extends State<GamePage> with TickerProviderStateMixin {
+  int _moveCount = 0;
+  Glass? _heldGlass;
+
   final List<Glass> _glasses = [
     Glass(size: 3),
     Glass(size: 5),
     Glass(size: 8, contents: 8),
   ];
+
+  void incrementMoves() {
+    setState(() {
+      _moveCount++;
+    });
+  }
+
+  void restartGame() {
+    Navigator.pop(context);
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => GamePage()),
+    );
+  }
+
+  void backToHome() {
+    Navigator.pop(context);
+  }
+
+  void checkGameWin() async {
+    if (_glasses[0].contents == 0 &&
+        _glasses[1].contents == 4 &&
+        _glasses[2].contents == 4) {
+      bool restart = await showDialog(
+        context: context,
+        useSafeArea: true,
+        barrierDismissible: false,
+        builder: (context) {
+          return ResultMenu(moves: _moveCount);
+        },
+      );
+      if (restart) {
+        restartGame();
+        return;
+      }
+      backToHome();
+    }
+  }
 
   Widget _buildGlassesRow() {
     return Row(
@@ -29,18 +76,56 @@ class _GamePageState extends State<GamePage> with TickerProviderStateMixin {
     );
   }
 
+  bool _shouldHighlightGlass(bool noCandidates, Glass glass) {
+    return (_heldGlass != null && _heldGlass == glass) || !noCandidates;
+  }
+
+  void _pourEvent(Glass pourGlass, Glass glass) {
+    setState(() {
+      pourGlass.pour(glass);
+      incrementMoves();
+      checkGameWin();
+    });
+  }
+
   Widget _buildDragTargetGlass(Glass glass) {
     return DragTarget<Glass>(
       builder: (context, candidateItems, rejectedItems) {
-        return Container(
-          decoration: BoxDecoration(
-            color: candidateItems.isNotEmpty
-                ? Colors.yellow
-                : Colors.transparent,
-          ),
-          child: Visibility.maintain(
-            visible: !glass.isDragged,
-            child: GlassWidget(glass: glass),
+        return GestureDetector(
+          onDoubleTap: () {
+            setState(() {
+              _heldGlass = glass;
+            });
+          },
+          onTap: () {
+            if (_heldGlass != null) {
+              if (_heldGlass == glass) {
+                setState(() {
+                  _heldGlass = null;
+                });
+                return;
+              }
+              setState(() {
+                _pourEvent(_heldGlass!, glass);
+                _heldGlass = null;
+              });
+              return;
+            }
+          },
+          child: ClipRRect(
+            borderRadius: .only(
+              bottomLeft: .circular(10),
+              bottomRight: .circular(10),
+            ),
+            child: ColorFiltered(
+              colorFilter: _shouldHighlightGlass(candidateItems.isEmpty, glass)
+                  ? .mode(Colors.white, .softLight)
+                  : .mode(Colors.transparent, .screen),
+              child: Visibility.maintain(
+                visible: !glass.isDragged,
+                child: GlassWidget(glass: glass),
+              ),
+            ),
           ),
         );
       },
@@ -51,9 +136,7 @@ class _GamePageState extends State<GamePage> with TickerProviderStateMixin {
         return true;
       },
       onAcceptWithDetails: (details) {
-        setState(() {
-          details.data.pour(glass);
-        });
+        _pourEvent(details.data, glass);
       },
     );
   }
@@ -63,15 +146,14 @@ class _GamePageState extends State<GamePage> with TickerProviderStateMixin {
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
-          LongPressDraggable<Glass>(
+          Draggable<Glass>(
             data: glass,
-            maxSimultaneousDrags: 1,
-            dragAnchorStrategy: pointerDragAnchorStrategy,
             feedback: GlassWidget(glass: glass),
             child: _buildDragTargetGlass(glass),
             onDragStarted: () {
               setState(() {
                 glass.isDragged = true;
+                _heldGlass = null;
               });
             },
             onDragEnd: (details) {
@@ -80,7 +162,7 @@ class _GamePageState extends State<GamePage> with TickerProviderStateMixin {
               });
             },
           ),
-          Text("${glass.contents}")
+          ContentsLabel(label: "${glass.contents}"),
         ],
       ),
     );
@@ -88,14 +170,49 @@ class _GamePageState extends State<GamePage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIMode(.immersiveSticky, overlays: [.top]);
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: AppBar(backgroundColor: Colors.transparent, bottomOpacity: 0),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.transparent,
+        bottomOpacity: 0,
+      ),
       body: Stack(
         children: [
           GameBackground(),
           TableBackground(),
-          Column(children: [Spacer(), _buildGlassesRow(), Spacer()]),
+          SafeArea(
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: StrokedLabel(label: "Moves: $_moveCount"),
+                    ),
+                    Spacer(),
+                    RoundButton(
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return PauseMenu();
+                          },
+                          useSafeArea: true,
+                          barrierDismissible: false,
+                        );
+                      },
+                      icon: Icon(Icons.pause),
+                    ),
+                  ],
+                ),
+                Spacer(),
+                _buildGlassesRow(),
+                Spacer(),
+              ],
+            ),
+          ),
         ],
       ),
     );

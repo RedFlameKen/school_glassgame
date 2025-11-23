@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mp5/colors/colors.dart';
 
 class LargeButton extends StatelessWidget {
   final Function() onPressed;
@@ -14,11 +15,11 @@ class LargeButton extends StatelessWidget {
     super.key,
     required this.onPressed,
     required this.label,
-    this.backgroundColor = Colors.lightBlue,
-    this.foregroundColor = Colors.white,
+    this.backgroundColor = GlassGameColors.BUTTON_BACKGROUND,
+    this.foregroundColor = GlassGameColors.BUTTON_FOREGROUND,
     this.size = const Size(200, 80),
     this.borderSize = 5,
-    this.borderColor = Colors.grey
+    this.borderColor = GlassGameColors.GLASS,
   });
 
   @override

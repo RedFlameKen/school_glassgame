@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:mp5/components/background/game_background.dart';
 import 'package:mp5/components/large_button.dart';
@@ -16,7 +18,13 @@ class HomePage extends StatelessWidget {
             Column(
               children: [
                 Spacer(),
-                Padding(padding: .all(15), child: Text("Glass Game")),
+                Padding(
+                  padding: .only(left: 50, right: 50),
+                  child: Image.asset(
+                    "assets/images/glass_game_title.png",
+                    fit: .fill,
+                  ),
+                ),
                 Spacer(),
                 Column(
                   mainAxisAlignment: .spaceAround,
@@ -42,7 +50,10 @@ class HomePage extends StatelessWidget {
                     Center(
                       child: Padding(
                         padding: .all(15),
-                        child: LargeButton(onPressed: () {}, label: "Exit"),
+                        child: LargeButton(
+                          onPressed: () => exit(0),
+                          label: "Exit",
+                        ),
                       ),
                     ),
                   ],

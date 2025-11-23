@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mp5/colors/colors.dart';
 
 class GlassWidget extends StatefulWidget {
   final Glass glass;
@@ -32,7 +33,7 @@ class _GlassWidgetState extends State<GlassWidget> with TickerProviderStateMixin
             bottomLeft: .circular(10),
             topLeft: .circular(10),
           ),
-          color: Colors.grey,
+          color: GlassGameColors.GLASS,
         ),
         child: Padding(
           padding: const EdgeInsets.only(
@@ -42,8 +43,8 @@ class _GlassWidgetState extends State<GlassWidget> with TickerProviderStateMixin
             right: 2,
           ),
           child: LinearProgressIndicator(
-            color: Colors.lightBlue,
-            backgroundColor: Colors.grey,
+            color: GlassGameColors.WATER,
+            backgroundColor: GlassGameColors.GLASS,
             value: widget.glass.contents / widget.glass.size,
             minHeight: 50,
             borderRadius: .only(
@@ -76,12 +77,10 @@ class Glass {
 
     if (overflow > 0) {
       contents = size;
-      debugPrint("filled with overflow $contents");
       return overflow;
     }
 
     contents += amount;
-    debugPrint("filled $contents");
     return overflow;
   }
 
@@ -90,9 +89,6 @@ class Glass {
       return false;
     }
     contents = rGlass.fill(contents);
-    debugPrint("poured ${rGlass.contents}");
     return true;
   }
 }
-
-// comment to avoid lsp errors
