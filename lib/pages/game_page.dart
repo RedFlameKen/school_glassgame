@@ -9,6 +9,7 @@ import 'package:glassgame/components/large_label.dart';
 import 'package:glassgame/components/pause_menu.dart';
 import 'package:glassgame/components/result_menu.dart';
 import 'package:glassgame/components/round_button.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class GamePage extends StatefulWidget {
   const GamePage({super.key});
@@ -26,6 +27,30 @@ class _GamePageState extends State<GamePage> with TickerProviderStateMixin {
     Glass(size: 5),
     Glass(size: 8, contents: 8),
   ];
+
+  @override
+  void initState(){
+    super.initState();
+    _checkHelpShown();
+  }
+
+  void _checkHelpShown() async {
+    final prefs = await SharedPreferencesWithCache.create(
+      cacheOptions: const SharedPreferencesWithCacheOptions(
+        allowList: {"helpShown"}
+      ),
+    );
+
+    if(prefs.containsKey("helpShown")){
+      bool helpShown = prefs.getBool("helpShown")!;
+      if(!helpShown){
+        _showHelpDialog();
+      }
+      return;
+    }
+    await prefs.setBool("helpShown", true);
+    _showHelpDialog();
+  }
 
   void incrementMoves() {
     setState(() {
@@ -166,6 +191,16 @@ class _GamePageState extends State<GamePage> with TickerProviderStateMixin {
     );
   }
 
+   Future<T?> _showHelpDialog<T>() async {
+    return showDialog<T>(
+      context: context,
+      useSafeArea: true,
+      builder: (context) {
+        return HelpMenu();
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -186,15 +221,9 @@ class _GamePageState extends State<GamePage> with TickerProviderStateMixin {
                   Spacer(),
                   IconButton(
                     onPressed: () {
-                      showDialog(
-                        context: context,
-                        useSafeArea: true,
-                        builder: (context) {
-                          return HelpMenu();
-                        },
-                      );
+                      _showHelpDialog();
                     },
-                    icon: Icon(Icons.help_outline, color: Colors.white,),
+                    icon: Icon(Icons.help_outline, color: Colors.white),
                     iconSize: 40,
                   ),
                   RoundButton(
