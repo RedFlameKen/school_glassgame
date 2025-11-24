@@ -7,7 +7,7 @@ class HelpMenu extends StatelessWidget {
   static const String MECHANICS_HELP_MESSAGE =
       "Pour water from one glass to another until the first glass has no water, the second glass has 4 ounces, and the third glass has 4 ounces. Pouring will transfer all water from the pouring glass to the receiving glass until the receiving glass is full. In which case, any remaining water will stay in the pouring glass.";
   static const String DRAG_HELP_MESSAGE =
-      "Dragging a glass on top of another pour water into the hovered glass.";
+      "Dragging a glass on top of another will pour water into the hovered glass.";
   static const String TAP_HELP_MESSAGE =
       "Double tapping on a glass will mark it as a glass to pour. Tapping another glass will receive the poured water.";
 
